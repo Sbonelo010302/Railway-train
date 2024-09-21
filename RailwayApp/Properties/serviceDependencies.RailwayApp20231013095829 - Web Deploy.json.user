@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql4": {
+      "restored": true,
+      "restoreTime": "2023-10-13T08:06:51.3029554Z"
+    }
+  },
+  "parameters": {
+    "mssql4.resourceGroupName": {
+      "Name": "mssql4.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "RailwayApp20231013095829ResourceGroup"
+    },
+    "mssql4.subscriptionId": {
+      "Name": "mssql4.subscriptionId",
+      "Type": "subscription",
+      "Value": "7195545b-1e6c-4e5a-b10a-a6c51c1a4b9f"
+    }
+  }
+}

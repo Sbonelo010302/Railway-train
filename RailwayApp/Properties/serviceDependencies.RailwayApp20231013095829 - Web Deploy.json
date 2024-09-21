@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql4": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/railwayapp3db/databases/RailwayApp3_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:RailWayApp3"
+    }
+  }
+}

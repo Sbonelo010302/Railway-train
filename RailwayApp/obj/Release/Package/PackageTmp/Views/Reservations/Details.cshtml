@@ -1,0 +1,95 @@
+﻿@model RailwayApp.Models.Reservation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reservation</h4>
+    @Html.AntiForgeryToken()
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.RouteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Booked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Booked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expiry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expiry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfReservations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfReservations)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.Rate)
+        </dd>
+        <dt>
+            @Html.DisplayName("Total")
+        </dt>
+
+        <dd>
+            @{
+                var ttl = Model.Route.Rate * Model.NoOfReservations;
+                Model.Data = "R"+ttl.ToString();
+            }
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="@Url.Action( "Create", "Payments", new { id = Model.Id })" title="Widget View" class="links">
+                <img alt="Widget View" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
+            </a>
+            @*<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" href="" />
+            @Html.ActionLink("Pay Now", "Create", "Payments", new { id = Model.Id }, new { @class = "btn btn-default" })*@
+            @*<input type="submit" value="Create" class="btn btn-primary" />*@
+        </div>
+    </div>
+    <br />
+    @Html.ActionLink("Back to List", "Index")
+</p>

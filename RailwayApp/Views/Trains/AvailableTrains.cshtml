@@ -1,0 +1,118 @@
+﻿@model IEnumerable<RailwayApp.Models.DayToDayTrainRoute>
+
+@{
+    ViewBag.Title = "AvailableTrains";
+    var db = new RailwayApp.Models.ApplicationDbContext();
+    var reservations = db.Reservations.ToList();
+    var DayToDayTrainRoutesController = new RailwayApp.Controllers.DayToDayTrainRoutesController();
+}
+
+<h2>Available Trains</h2>
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Add D2D Route", "Create", "DayToDayTrainRoutes")
+}
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+@using (Html.BeginForm("AvailableTrains", "trains", FormMethod.Post))
+{
+    <div class="row" style="align-content:flex-start">
+        <div class="input-group" style="margin:0px 0 0 16px">
+            <label class="col-form-label"> Route :  &nbsp; &nbsp;</label>
+            <select class="form-control" name="rtId">
+                @foreach (var item in db.Routes.OrderBy(a => a.From).ThenBy(a => a.To))
+                {
+                    <option value="@item.Id">@item.RouteName</option>
+                }
+            </select>
+            <label class="col-form-label">  &nbsp; &nbsp;Date :  &nbsp; &nbsp;</label>
+            <input type="text" class="form-control datepicker" placeholder="yyyy/mm/dd" name="day" required value="@ViewBag.day">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <br />
+}
+<table class="table">
+    <tr>
+        <th>
+            Route
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Train.Name)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Train Capacity</th>
+            <th>Tickets available</th>
+        }
+        <th>
+           Depature
+        </th>
+        <th>
+           Arrival
+        </th>
+        @if (!User.IsInRole("Admin") || !Request.IsAuthenticated)
+        {
+            <th></th>
+        }
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @{
+                var d2dreservations = reservations.Where(a => a.DayToDayTrainRouteId == item.Id).Sum(a => a.NoOfReservations);
+                var ticketsRemaining = item.Train.MaxNoOfPassengers - d2dreservations;
+                var arrivalDay = DayToDayTrainRoutesController.GetArrival(item);
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Route.RouteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Train.Name)
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Train.MaxNoOfPassengers)
+                </td>
+
+                <td>
+                    @ticketsRemaining
+                </td>
+
+            }
+        <td>
+            @item.Day.ToShortDateString() @Html.DisplayFor(modelItem => item.DepatureTime)
+        </td>
+            <td>
+                @arrivalDay @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+
+            @if (!User.IsInRole("Admin") || !Request.IsAuthenticated)
+            {
+                if (d2dreservations < item.Train.MaxNoOfPassengers)
+                {
+                    <td>
+                        <a class="btn btn-primary" href="/reservations/Reserve?dtdId=@item.Id&tcktl=@ticketsRemaining"> Reserve now</a> <br />
+                        <span>@ticketsRemaining tickets left</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-primary" disabled> Sold out!</a>
+                    </td>
+                }
+            }
+
+        </tr>
+    }
+
+</table>

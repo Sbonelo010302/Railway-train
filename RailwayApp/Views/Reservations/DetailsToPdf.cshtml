@@ -1,0 +1,50 @@
+﻿@model RailwayApp.Models.Reservation
+
+@{
+    ViewBag.Title = "Reservation details";
+}
+
+<h2>Reservation details</h2>
+
+<div>
+    <h4>Reservation : @Html.DisplayFor(model => model.SingleReferenceNumber)</h4>
+    <hr />
+    <table class="table table-striped">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Customer.FirstName)</th>
+            <td> @Html.DisplayFor(model => model.Customer.FirstName)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Route.To)</th>
+            <td>@Html.DisplayFor(model => model.Route.To)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.IsActive)</th>
+            <td>@Html.DisplayFor(model => model.IsActive)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CreatedDateTime)</th>
+            <td>@Html.DisplayFor(model => model.CreatedDateTime)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ModifiedDateTime)</th>
+            <td>@Html.DisplayFor(model => model.ModifiedDateTime)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Booked)</th>
+            <td>@Html.DisplayFor(model => model.Booked)</td>
+        </tr>
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Expiry)</th>
+            <td>@Html.DisplayFor(model => model.Expiry)</td>
+        </tr>
+        <tr>
+            <th>Tickets Bought</th>
+            <td> @Html.DisplayFor(model => model.NoOfReservations)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.GroupReferenceNumber)</th>
+            <td> @Html.DisplayFor(model => model.GroupReferenceNumber)</td>
+        </tr>
+    </table>
+</div>

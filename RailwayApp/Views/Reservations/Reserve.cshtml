@@ -1,0 +1,82 @@
+﻿@model IEnumerable<RailwayApp.Models.DayToDayTrainRoute>
+
+@{
+    ViewBag.Title = "Reserve";
+}
+
+<h2>Reserve</h2>
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                Route
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Route.RouteName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Train.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Train.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <td>
+                @item.Day.ToShortDateString()
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepatureTime)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepatureTime)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+        </tr>
+        using (Html.BeginForm("Reserve", "Reservations", FormMethod.Post))
+        {
+            <tr>
+                <th>
+                    Ref
+                </th>
+                <td>
+                    <input type="text" class="form-control" placeholder="" name="dtdId" readonly
+                           value="@item.Id">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Tickets
+                </th>
+                <td>
+                    <input type="text" class="form-control" placeholder="" name="numTckt" max="@ViewBag.ticketsLeft" required value="@ViewBag.numoftckts">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <button class="btn btn-primary" type="submit">
+                        Reserve
+                    </button>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right nav-item nav-link", style = "margin-top: -2%;" }))
+    {
+        @Html.AntiForgeryToken()
+
+<ul class="nav navbar-nav navbar-right">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "..!", "", "", htmlAttributes: new
+       {
+           title = User.Identity.GetUserName()
+       })
+        </li>
+
+    }
+    else
+    {
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "..!", "UpdateProfile", "Customers", new { username = User.Identity.GetUserName() }, htmlAttributes: new
+       {
+           title = "Update profile"
+       })
+        </li>
+    }
+
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-item nav-link" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-item nav-link" })</li>
+    </ul>
+}

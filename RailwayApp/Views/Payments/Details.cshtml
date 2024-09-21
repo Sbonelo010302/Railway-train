@@ -1,0 +1,102 @@
+﻿@model RailwayApp.Models.Payment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.Route.RouteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.Route.RouteName)
+        </dd>
+        @if (Model.Reservation.NoOfReservations > 1)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Reservation.GroupReferenceNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Reservation.GroupReferenceNumber)
+            </dd>
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Reservation.SingleReferenceNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Reservation.SingleReferenceNumber)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.Booked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.Booked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.Expiry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.Expiry)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Pay Now", "Payment", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

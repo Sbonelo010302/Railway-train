@@ -1,0 +1,87 @@
+﻿@model RailwayApp.Models.DayToDayTrainRoute
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Day To Day Train Route</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (ViewBag.Error != null)
+        {
+
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Day, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Day, new { htmlAttributes = new { @class = "datepicker" } })*@
+
+                <input type="text" id="day" name="Day" class="datepicker form-control" placeholder="YYYY/MM/DD" required>
+                @Html.ValidationMessageFor(model => model.Day, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepatureTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DepatureTime", ViewBag.TrainTimes as SelectList, htmlAttributes: new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.DepatureTime, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.DepatureTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrainId, "Train", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TrainId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TrainId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RouteId, "Route", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RouteId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RouteId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+@*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+<script>
+    $(document).ready(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            beforeShowDay: $.datepicker.noWeekends,
+            dateFormat: "yy/mm/dd",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-0:+2",
+            showToday: false,
+            minDate: +0
+        }); //Initialise any date pickers
+    });
+</script>
+@Scripts.Render("~/bundles/jqueryval")

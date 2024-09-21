@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql3": {
+      "restored": true,
+      "restoreTime": "2023-10-12T17:52:13.3341084Z"
+    }
+  },
+  "parameters": {
+    "mssql3.subscriptionId": {
+      "Name": "mssql3.subscriptionId",
+      "Type": "subscription",
+      "Value": "db64ef20-b614-413e-b8cc-a13d17764805"
+    },
+    "mssql3.resourceGroupName": {
+      "Name": "mssql3.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "RailwayApp"
+    }
+  }
+}

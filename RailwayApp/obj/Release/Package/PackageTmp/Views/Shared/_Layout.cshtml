@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway App</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/Content/theme/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/theme/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/Content/theme/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/Content/theme/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
+        <div class="row">
+            <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</a>
+                    <span class="text-body">|</span>
+                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>info@example.com</a>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-body px-3" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-body pl-3" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="/Home/Index" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">Royal Railway</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+
+                                        @Html.ActionLink("Reservations", "Index", "Reservations", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                        @Html.ActionLink("Routes", "Index", "Routes", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                        @Html.ActionLink("D2D Routes", "AvailableTrains", "Trains", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                        @Html.ActionLink("Payment", "Index", "Payments", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                        @Html.ActionLink("Employees", "Index", "Employees", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                        @Html.ActionLink("Customers", "Index", "Customers", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                        @Html.ActionLink("Trains", "Index", "Trains", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Get Tickets", "AvailableTrains", "Trains", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                @Html.ActionLink("Routes", "Index", "Routes", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                                @Html.ActionLink("Reservations", "Index", "Reservations", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                            }
+                        }
+                        @if (!Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Get Tickets", "AvailableTrains", "Trains", null, htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                        }
+
+                        @Html.ActionLink("About Us", "Contact", "Home", htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                        @Html.ActionLink("Contact", "Contact", "Home", htmlAttributes: new { @class = "nav-item nav-link", style = "color: #F77D0A !important;" })
+                        @*<div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
+            <div class="dropdown-menu rounded-0 m-0">
+                <a href="car.html" class="dropdown-item">Car Listing</a>
+                <a href="detail.html" class="dropdown-item">Car Detail</a>
+                <a href="booking.html" class="dropdown-item">Car Booking</a>
+            </div>
+        </div>*@
+                        @*<div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+            <div class="dropdown-menu rounded-0 m-0">
+                <a href="team.html" class="dropdown-item">The Team</a>
+                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+            </div>
+        </div>*@
+
+                        <span class="nav-item nav-link">|</span>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>*@
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Railway Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

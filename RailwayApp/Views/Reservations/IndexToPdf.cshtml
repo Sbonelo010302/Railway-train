@@ -1,0 +1,69 @@
+﻿@model IEnumerable<RailwayApp.Models.Reservation>
+@using RailwayApp.Controllers
+
+@{
+    ViewBag.Title = "Reservations";
+}
+
+@*<div class="alert alert-danger">
+        Payment is required within 10 minutes after booking is made, or Reservation will expire!
+    </div>*@
+<h2>All Reservations</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Full Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfReservations)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Route.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expiry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booked)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfReservations)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Route.RouteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expiry)
+            </td>
+            <td>
+                @if (item.Booked == true)
+                {
+                    <span>Booked -- </span>
+                    ReservationsController reservations = new ReservationsController();
+                    var resRefNo = reservations.GetRef(item.Id) ?? "";
+                    <span>Reference Number: @resRefNo</span>
+                }
+                else
+                {
+                    <span>Not Booked</span>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
